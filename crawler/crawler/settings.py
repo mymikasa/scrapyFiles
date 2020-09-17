@@ -52,6 +52,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'crawler.extensions.fake_ua.FakeUAMiddleware': 100,
+    'scrapy_redis.pipelines.RedisPipeline': 300
     # 'crawler.middlewares.CrawlerDownloaderMiddleware': 543,
 }
 
@@ -67,6 +68,7 @@ ITEM_PIPELINES = {
     # 'crawler.pipelines.JsonlineExporter': 300,
     # 'crawler.pipelines.CrawlerPipeline': 300,
     'crawler.pipelines.JSONFileExporterPipeline': 300,
+    'scrapy_redis.pipelines.RedisPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -92,3 +94,8 @@ ITEM_PIPELINES = {
 
 EXPORT_JSON = True
 OUTPUT_DIR = 'data'
+
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+REDIS_URL = 'redis://root:scrapy_redis_test@192.168.126.132:6379'

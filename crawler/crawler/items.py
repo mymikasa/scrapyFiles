@@ -29,7 +29,10 @@ class BaseItem(scrapy.Item):
 
 
 class DoubanUrl(BaseItem):
-    test_url = scrapy.Field()
+    book_url = scrapy.Field()
+    book_name = scrapy.Field()
+    book_auther = scrapy.Field()
+    # book_price = scrapy.Field()
 
 
 
